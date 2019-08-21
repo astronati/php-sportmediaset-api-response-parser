@@ -4,11 +4,13 @@ namespace SMRP\Response;
 
 use SMRP\Exception\NotFoundResponseTypeException;
 use SMRP\Model\FootballerModel;
+use SMRP\Model\MatchModel;
 use SMRP\Model\TeamFormationModel;
 
 class ResponseParser
 {
     const GET_TEAM_FORMATION = 1;
+    const GET_MATCHES = 2;
 
     /**
      * @param array $apiResponse The response from the API
@@ -21,7 +23,6 @@ class ResponseParser
         switch ($type) {
             case self::GET_TEAM_FORMATION:
                 $teamFormationModel = new TeamFormationModel($apiResponse);
-
                 $firstStrings = [];
                 foreach ($apiResponse['formazionetitolari']['content']['Tables'][0]['Rows'] as $footballer) {
                     $firstStrings[] = new FootballerModel($footballer);
@@ -33,8 +34,13 @@ class ResponseParser
                     $reserves[] = new FootballerModel($footballer);
                 }
                 $teamFormationModel->setReserves($reserves);
-
                 return new GetTeamFormationResponse($teamFormationModel);
+            case self::GET_MATCHES:
+                $matchModels = [];
+                foreach ($apiResponse['content']['Tables'][0]['Rows'] as $match) {
+                    $matchModels[] = new MatchModel($match);
+                }
+                return new GetMatchesResponse($matchModels);
             default:
                 throw new NotFoundResponseTypeException('Response type not found');
         }
