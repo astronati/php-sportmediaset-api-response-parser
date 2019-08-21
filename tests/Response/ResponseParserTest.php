@@ -4,6 +4,7 @@ namespace SODRP\tests\Response;
 
 use PHPUnit\Framework\TestCase;
 use SMRP\Exception\NotFoundResponseTypeException;
+use SMRP\Response\GetMatchesResponse;
 use SMRP\Response\GetTeamFormationResponse;
 use SMRP\Response\ResponseParser;
 
@@ -12,14 +13,20 @@ class ResponseParserTest extends TestCase
     public function dataProvider()
     {
         return [
-          [
-              [
-                  'formazionetitolari' => ['content' => ['Tables' => [['Rows' => []]]]],
-                  'sostituzioni' => ['content' => ['Tables' => [['Rows' => []]]]],
-              ],
-              ResponseParser::GET_TEAM_FORMATION,
-              GetTeamFormationResponse::class
-          ],
+            [
+                [
+                    'formazionetitolari' => ['content' => ['Tables' => [['Rows' => []]]]],
+                    'sostituzioni' => ['content' => ['Tables' => [['Rows' => []]]]],
+                ],
+                ResponseParser::GET_TEAM_FORMATION,
+                GetTeamFormationResponse::class
+            ],
+            [
+
+                ['content' => ['Tables' => [['Rows' => []]]]],
+                ResponseParser::GET_MATCHES,
+                GetMatchesResponse::class
+            ],
         ];
     }
 

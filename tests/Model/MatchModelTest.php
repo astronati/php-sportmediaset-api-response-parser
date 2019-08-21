@@ -1,0 +1,81 @@
+<?php
+
+namespace SMRP\tests\Model;
+
+use PHPUnit\Framework\TestCase;
+use SMRP\Model\MatchModel;
+
+class MatchModelTest extends TestCase
+{
+    public function homeTeamDataProvider()
+    {
+        return [
+            [["squadra-casa" => "Parma", "squadra-trasferta" => "Juventus", "data-partita" => "24/08/2019", "ora-partita" => "18:00"], 'Parma'],
+        ];
+    }
+
+    /**
+     * @dataProvider homeTeamDataProvider
+     * @param array $apiResponse
+     * @param string $expectedResult
+     */
+    public function testGetHomeTeam($apiResponse, $expectedResult)
+    {
+        $matchModel = new MatchModel($apiResponse);
+        $this->assertEquals($expectedResult, $matchModel->getHomeTeam());
+    }
+
+    public function awayTeamDataProvider()
+    {
+        return [
+            [["squadra-casa" => "Parma", "squadra-trasferta" => "Juventus", "data-partita" => "24/08/2019", "ora-partita" => "18:00"], 'Juventus'],
+        ];
+    }
+
+    /**
+     * @dataProvider awayTeamDataProvider
+     * @param array $apiResponse
+     * @param string $expectedResult
+     */
+    public function testGetAwayTeam($apiResponse, $expectedResult)
+    {
+        $matchModel = new MatchModel($apiResponse);
+        $this->assertEquals($expectedResult, $matchModel->getAwayTeam());
+    }
+
+    public function dateDataProvider()
+    {
+        return [
+            [["squadra-casa" => "Parma", "squadra-trasferta" => "Juventus", "data-partita" => "24/08/2019", "ora-partita" => "18:00"], '24/08/2019'],
+        ];
+    }
+
+    /**
+     * @dataProvider dateDataProvider
+     * @param array $apiResponse
+     * @param string $expectedResult
+     */
+    public function testGetDate($apiResponse, $expectedResult)
+    {
+        $matchModel = new MatchModel($apiResponse);
+        $this->assertEquals($expectedResult, $matchModel->getDate());
+    }
+
+    public function timeDataProvider()
+    {
+        return [
+            [["squadra-casa" => "Parma", "squadra-trasferta" => "Juventus", "data-partita" => "24/08/2019", "ora-partita" => "18:00"], '18:00'],
+        ];
+    }
+
+    /**
+     * @dataProvider timeDataProvider
+     * @param array $apiResponse
+     * @param string $expectedResult
+     */
+    public function testGetTime($apiResponse, $expectedResult)
+    {
+        $matchModel = new MatchModel($apiResponse);
+        $this->assertEquals($expectedResult, $matchModel->getTime());
+    }
+}
