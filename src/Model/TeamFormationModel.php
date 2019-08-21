@@ -57,7 +57,7 @@ class TeamFormationModel
     }
 
     /**
-     * @param FootballerModel[]
+     * @param FootballerModel[] $firstStrings
      */
     public function setFirstStrings(array $firstStrings): void
     {

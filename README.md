@@ -1,3 +1,7 @@
+[![Build Status](https://travis-ci.org/astronati/php-sportmediaset-api-response-parser.svg?branch=master)](https://travis-ci.org/astronati/php-sportmediaset-api-response-parser)
+[![Latest Stable Version](https://poser.pugx.org/astronati/sportmediaset-api-response-parser/v/stable)](https://packagist.org/packages/astronati/sportmediaset-api-response-parser)
+[![License](https://poser.pugx.org/astronati/sportmediaset-api-response-parser/license)](https://packagist.org/packages/astronati/sportmediaset-api-response-parser)
+
 # SportMediaset Response Parser
 Allows to map responses provided by any SportMediaset API endpoint.
 
