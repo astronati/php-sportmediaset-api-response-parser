@@ -25,7 +25,7 @@ The library allows to return a model per each response and its content (formatio
 The following snippet can be helpful:
 
 ```php
-use SMRP\Response\ResponseParser;
+use SMRP\Response\Parser\ResponseParser;
 ...
 // Obtain a Response
 $apiResponse = ... // Save this the response from the SportMediaset API

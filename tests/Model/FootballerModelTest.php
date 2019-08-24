@@ -13,9 +13,23 @@ class FootballerModelTest extends TestCase
         $this->assertEquals(1, $footballerModel->getNumber());
     }
 
+    public function testSetNumber()
+    {
+        $footballerModel = new FootballerModel('Andrea', 1);
+        $footballerModel->setNumber(3);
+        $this->assertEquals(3, $footballerModel->getNumber());
+    }
+
     public function testGetName()
     {
         $footballerModel = new FootballerModel('Andrea', 1);
         $this->assertEquals('Andrea', $footballerModel->getName());
+    }
+
+    public function testSetName()
+    {
+        $footballerModel = new FootballerModel('Andrea', 1);
+        $footballerModel->setName('Roberto');
+        $this->assertEquals('Roberto', $footballerModel->getName());
     }
 }
