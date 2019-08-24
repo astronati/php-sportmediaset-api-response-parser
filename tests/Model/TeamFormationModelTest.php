@@ -43,25 +43,6 @@ class TeamFormationModelTest extends TestCase
         $this->assertEquals($expectedResult, $teamFormationModel->getModule());
     }
 
-    public function getUnavailablesDataProvider()
-    {
-        return [
-            [['indisponibiliformazione' => 'Nessuno'], []],
-            [['indisponibiliformazione' => 'Andrea, Giovanni'], ['Andrea', 'Giovanni']],
-        ];
-    }
-
-    /**
-     * @dataProvider getUnavailablesDataProvider
-     * @param array $apiResponse
-     * @param string $expectedResult
-     */
-    public function testGetUnavailables($apiResponse, $expectedResult)
-    {
-        $teamFormationModel = new TeamFormationModel($apiResponse);
-        $this->assertEquals($expectedResult, $teamFormationModel->getUnavailables());
-    }
-
     public function testGetFirstStrings()
     {
         $teamFormationModel = new TeamFormationModel([]);
@@ -74,5 +55,19 @@ class TeamFormationModelTest extends TestCase
         $teamFormationModel = new TeamFormationModel([]);
         $teamFormationModel->setReserves(['andrea']);
         $this->assertEquals(['andrea'], $teamFormationModel->getReserves());
+    }
+
+    public function testGetUnavailables()
+    {
+        $teamFormationModel = new TeamFormationModel([]);
+        $teamFormationModel->setUnavailables(['andrea']);
+        $this->assertEquals(['andrea'], $teamFormationModel->getUnavailables());
+    }
+
+    public function testGetDisqualified()
+    {
+        $teamFormationModel = new TeamFormationModel([]);
+        $teamFormationModel->setDisqualified(['andrea']);
+        $this->assertEquals(['andrea'], $teamFormationModel->getDisqualified());
     }
 }

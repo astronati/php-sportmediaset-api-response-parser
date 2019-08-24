@@ -4,26 +4,29 @@ namespace SMRP\Model;
 
 class FootballerModel
 {
-    const NUMBER_KEY = 'numero-maglia';
-    const NAME_KEY = 'giocatore';
+    /**
+     * @var string
+     */
+    private $name;
 
     /**
-     * @var array
+     * @var string|null
      */
-    private $apiResponse;
+    private $number;
 
-    public function __construct(array $apiResponse)
+    public function __construct(string $name, string $number = null)
     {
-        $this->apiResponse = $apiResponse;
-    }
-
-    public function getNumber(): int
-    {
-        return $this->apiResponse[self::NUMBER_KEY];
+        $this->name = $name;
+        $this->number = $number;
     }
 
     public function getName(): string
     {
-        return $this->apiResponse[self::NAME_KEY];
+        return $this->name;
+    }
+
+    public function getNumber(): ?string
+    {
+        return $this->number;
     }
 }
