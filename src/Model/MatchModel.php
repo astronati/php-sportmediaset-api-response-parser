@@ -8,6 +8,8 @@ class MatchModel
     const MATCH_TIME_KEY = 'ora-partita';
     const HOME_TEAM_KEY = 'squadra-casa';
     const AWAY_TEAM_KEY = 'squadra-trasferta';
+    const DATE_FORMAT = 'd/m/Y';
+    const TIME_FORMAT = 'H:i';
 
     /**
      * @var array
@@ -21,13 +23,13 @@ class MatchModel
 
     public function getDate(): string
     {
-        // The date format is: dd/mm/yyyy
+        // The date format is: d/m/Y
         return $this->apiResponse[self::MATCH_DATE_KEY];
     }
 
     public function getTime(): string
     {
-        // The date format is: HH:ii
+        // The date format is: H:i
         return $this->apiResponse[self::MATCH_TIME_KEY];
     }
 

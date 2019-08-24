@@ -1,11 +1,12 @@
 <?php
 
-namespace SMRP\Response;
+namespace SMRP\Response\Parser;
 
 use SMRP\Exception\NotFoundResponseTypeException;
-use SMRP\Model\FootballerModel;
 use SMRP\Model\MatchModel;
 use SMRP\Model\TeamFormationModel;
+use SMRP\Response\GetMatchesResponse;
+use SMRP\Response\GetTeamFormationResponse;
 
 class ResponseParser
 {
@@ -25,15 +26,32 @@ class ResponseParser
                 $teamFormationModel = new TeamFormationModel($apiResponse);
                 $firstStrings = [];
                 foreach ($apiResponse['formazionetitolari']['content']['Tables'][0]['Rows'] as $footballer) {
-                    $firstStrings[] = new FootballerModel($footballer);
+                    $firstStrings[] = FootballerParser::parse($footballer);
                 }
                 $teamFormationModel->setFirstStrings($firstStrings);
 
                 $reserves = [];
                 foreach ($apiResponse['sostituzioni']['content']['Tables'][0]['Rows'] as $footballer) {
-                    $reserves[] = new FootballerModel($footballer);
+                    $reserves[] = FootballerParser::parse($footballer);
                 }
                 $teamFormationModel->setReserves($reserves);
+
+                $unavailables = [];
+                if ($apiResponse['indisponibiliformazione'] != 'Nessuno') {
+                    foreach (explode(', ', $apiResponse['indisponibiliformazione']) as $footballerName) {
+                        $unavailables[] = FootballerParser::parse($footballerName);
+                    }
+                }
+                $teamFormationModel->setUnavailables($unavailables);
+
+                $disqualified = [];
+                if ($apiResponse['squalificati'] != 'Nessuno') {
+                    foreach (explode(', ', $apiResponse['squalificati']) as $footballerName) {
+                        $disqualified[] = FootballerParser::parse($footballerName);
+                    }
+                }
+                $teamFormationModel->setDisqualified($disqualified);
+
                 return new GetTeamFormationResponse($teamFormationModel);
             case self::GET_MATCHES:
                 $matchModels = [];

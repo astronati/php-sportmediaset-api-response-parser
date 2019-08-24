@@ -6,8 +6,6 @@ class TeamFormationModel
 {
     const COACH_KEY = 'allenatore';
     const MODULE_KEY = 'modulo';
-    const UNAVAILABLES_KEY = 'indisponibiliformazione';
-    const NULL_VALUE = 'Nessuno';
 
     /**
      * @var array
@@ -24,6 +22,16 @@ class TeamFormationModel
      */
     private $reserves = [];
 
+    /**
+     * @var FootballerModel[]
+     */
+    private $unavailables = [];
+
+    /**
+     * @var FootballerModel[]
+     */
+    private $disqualified = [];
+
     public function __construct(array $apiResponse)
     {
         $this->apiResponse = $apiResponse;
@@ -37,15 +45,6 @@ class TeamFormationModel
     public function getModule(): string
     {
         return $this->apiResponse[self::MODULE_KEY];
-    }
-
-    public function getUnavailables(): array
-    {
-        if ($this->apiResponse[self::UNAVAILABLES_KEY] == self::NULL_VALUE) {
-            return [];
-        }
-
-        return explode(', ', $this->apiResponse[self::UNAVAILABLES_KEY]);
     }
 
     /**
@@ -78,5 +77,37 @@ class TeamFormationModel
     public function setReserves(array $reserves): void
     {
         $this->reserves = $reserves;
+    }
+
+    /**
+     * @return FootballerModel[]
+     */
+    public function getUnavailables(): array
+    {
+        return $this->unavailables;
+    }
+
+    /**
+     * @param FootballerModel[] $unavailables
+     */
+    public function setUnavailables(array $unavailables): void
+    {
+        $this->unavailables = $unavailables;
+    }
+
+    /**
+     * @return FootballerModel[]
+     */
+    public function getDisqualified(): array
+    {
+        return $this->disqualified;
+    }
+
+    /**
+     * @param FootballerModel[] $disqualified
+     */
+    public function setDisqualified(array $disqualified): void
+    {
+        $this->disqualified = $disqualified;
     }
 }

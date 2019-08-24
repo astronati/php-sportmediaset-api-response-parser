@@ -9,13 +9,13 @@ class FootballerModelTest extends TestCase
 {
     public function testGetNumber()
     {
-        $footballerModel = new FootballerModel(['numero-maglia' => 1, 'giocatore' => 'Andrea']);
+        $footballerModel = new FootballerModel('Andrea', 1);
         $this->assertEquals(1, $footballerModel->getNumber());
     }
 
     public function testGetName()
     {
-        $footballerModel = new FootballerModel(['numero-maglia' => 1, 'giocatore' => 'Andrea']);
+        $footballerModel = new FootballerModel('Andrea', 1);
         $this->assertEquals('Andrea', $footballerModel->getName());
     }
 }
