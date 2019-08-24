@@ -3,6 +3,7 @@
 namespace SMRP\tests\Model;
 
 use PHPUnit\Framework\TestCase;
+use SMRP\Model\FootballerModel;
 use SMRP\Model\TeamFormationModel;
 
 class TeamFormationModelTest extends TestCase
@@ -46,28 +47,36 @@ class TeamFormationModelTest extends TestCase
     public function testGetFirstStrings()
     {
         $teamFormationModel = new TeamFormationModel([]);
-        $teamFormationModel->setFirstStrings(['andrea']);
-        $this->assertEquals(['andrea'], $teamFormationModel->getFirstStrings());
+        $teamFormationModel->setFirstStrings([new FootballerModel('andrea')]);
+        $this->assertEquals(1, count($teamFormationModel->getFirstStrings()));
+        $this->assertEquals(0, $teamFormationModel->getFirstStrings()[0]->getPosition());
+        $this->assertEquals('FIRST_STRING', $teamFormationModel->getFirstStrings()[0]->getStatus());
     }
 
     public function testGetReserves()
     {
         $teamFormationModel = new TeamFormationModel([]);
-        $teamFormationModel->setReserves(['andrea']);
-        $this->assertEquals(['andrea'], $teamFormationModel->getReserves());
+        $teamFormationModel->setReserves([new FootballerModel('andrea')]);
+        $this->assertEquals(1, count($teamFormationModel->getReserves()));
+        $this->assertEquals(0, $teamFormationModel->getReserves()[0]->getPosition());
+        $this->assertEquals('RESERVE', $teamFormationModel->getReserves()[0]->getStatus());
     }
 
     public function testGetUnavailables()
     {
         $teamFormationModel = new TeamFormationModel([]);
-        $teamFormationModel->setUnavailables(['andrea']);
-        $this->assertEquals(['andrea'], $teamFormationModel->getUnavailables());
+        $teamFormationModel->setUnavailables([new FootballerModel('andrea')]);
+        $this->assertEquals(1, count($teamFormationModel->getUnavailables()));
+        $this->assertEquals(0, $teamFormationModel->getUnavailables()[0]->getPosition());
+        $this->assertEquals('UNAVAILABLE', $teamFormationModel->getUnavailables()[0]->getStatus());
     }
 
     public function testGetDisqualified()
     {
         $teamFormationModel = new TeamFormationModel([]);
-        $teamFormationModel->setDisqualified(['andrea']);
-        $this->assertEquals(['andrea'], $teamFormationModel->getDisqualified());
+        $teamFormationModel->setDisqualified([new FootballerModel('andrea')]);
+        $this->assertEquals(1, count($teamFormationModel->getDisqualified()));
+        $this->assertEquals(0, $teamFormationModel->getDisqualified()[0]->getPosition());
+        $this->assertEquals('DISQUALIFIED', $teamFormationModel->getDisqualified()[0]->getStatus());
     }
 }

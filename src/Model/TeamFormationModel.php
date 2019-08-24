@@ -7,6 +7,11 @@ class TeamFormationModel
     const COACH_KEY = 'allenatore';
     const MODULE_KEY = 'modulo';
 
+    const FIRST_STRING = 'FIRST_STRING';
+    const RESERVE = 'RESERVE';
+    const UNAVAILABLE = 'UNAVAILABLE';
+    const DISQUALIFIED = 'DISQUALIFIED';
+
     /**
      * @var array
      */
@@ -60,7 +65,11 @@ class TeamFormationModel
      */
     public function setFirstStrings(array $firstStrings): void
     {
-        $this->firstStrings = $firstStrings;
+        foreach ($firstStrings as $index => $firstString) {
+            $firstString->setPosition($index);
+            $firstString->setStatus(self::FIRST_STRING);
+            $this->firstStrings[] = $firstString;
+        }
     }
 
     /**
@@ -76,7 +85,11 @@ class TeamFormationModel
      */
     public function setReserves(array $reserves): void
     {
-        $this->reserves = $reserves;
+        foreach ($reserves as $index => $reserve) {
+            $reserve->setPosition($index);
+            $reserve->setStatus(self::RESERVE);
+            $this->reserves[] = $reserve;
+        }
     }
 
     /**
@@ -92,7 +105,11 @@ class TeamFormationModel
      */
     public function setUnavailables(array $unavailables): void
     {
-        $this->unavailables = $unavailables;
+        foreach ($unavailables as $index => $unavailable) {
+            $unavailable->setPosition($index);
+            $unavailable->setStatus(self::UNAVAILABLE);
+            $this->unavailables[] = $unavailable;
+        }
     }
 
     /**
@@ -108,6 +125,10 @@ class TeamFormationModel
      */
     public function setDisqualified(array $disqualified): void
     {
-        $this->disqualified = $disqualified;
+        foreach ($disqualified as $index => $disqualifiedFootballer) {
+            $disqualifiedFootballer->setPosition($index);
+            $disqualifiedFootballer->setStatus(self::DISQUALIFIED);
+            $this->disqualified[] = $disqualifiedFootballer;
+        }
     }
 }
