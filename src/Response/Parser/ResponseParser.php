@@ -25,7 +25,7 @@ class ResponseParser
             case self::GET_TEAM_FORMATION:
                 $teamFormationModel = new TeamFormationModel($apiResponse);
                 $firstStrings = [];
-                foreach ($apiResponse['formazionetitolari']['content']['Tables'][0]['Rows'] as $footballer) {
+                foreach ($apiResponse['titolari']['content']['Tables'][0]['Rows'] as $footballer) {
                     $firstStrings[] = FootballerParser::parse($footballer);
                 }
                 $teamFormationModel->setFirstStrings($firstStrings);
