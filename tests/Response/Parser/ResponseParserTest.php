@@ -15,7 +15,7 @@ class ResponseParserTest extends TestCase
         return [
             [
                 [
-                    'formazionetitolari' => ['content' => ['Tables' => [['Rows' => []]]]],
+                    'titolari' => ['content' => ['Tables' => [['Rows' => []]]]],
                     'sostituzioni' => ['content' => ['Tables' => [['Rows' => []]]]],
                     'indisponibiliformazione' => 'Nessuno',
                     'squalificati' => 'Nessuno',
