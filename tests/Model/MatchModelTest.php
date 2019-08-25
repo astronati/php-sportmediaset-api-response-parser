@@ -78,4 +78,22 @@ class MatchModelTest extends TestCase
         $matchModel = new MatchModel($apiResponse);
         $this->assertEquals($expectedResult, $matchModel->getTime());
     }
+
+    public function dateTimeDataProvider()
+    {
+        return [
+            [["squadra-casa" => "Parma", "squadra-trasferta" => "Juventus", "data-partita" => "24/08/2019", "ora-partita" => "18:00"], '2019-08-24T18:00:00+02:00'],
+        ];
+    }
+
+    /**
+     * @dataProvider dateTimeDataProvider
+     * @param array $apiResponse
+     * @param string $expectedResult
+     */
+    public function testGetDateTime($apiResponse, $expectedResult)
+    {
+        $matchModel = new MatchModel($apiResponse);
+        $this->assertEquals($expectedResult, $matchModel->getDateTime()->format(\DateTime::W3C));
+    }
 }

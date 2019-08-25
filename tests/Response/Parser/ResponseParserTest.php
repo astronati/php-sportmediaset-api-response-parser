@@ -45,6 +45,37 @@ class ResponseParserTest extends TestCase
         $this->assertSame($expectedClass, get_class($response));
     }
 
+    public function getTeamFormationResponseDataProvider()
+    {
+        return [
+            [
+                [
+                    'titolari' => ['content' => ['Tables' => [['Rows' => []]]]],
+                    'sostituzioni' => ['content' => ['Tables' => [['Rows' => []]]]],
+                    'indisponibiliformazione' => 'Nessuno',
+                    'squalificati' => 'Ter Stegen,',
+                ],
+                1,
+                'Ter Stegen'
+            ],
+        ];
+    }
+
+    /**
+     * @dataProvider getTeamFormationResponseDataProvider
+     * @param array $apiResponse
+     * @param int $expectedDisqualifiedCount
+     * @param string $expectedDisqualified
+     * @throws NotFoundResponseTypeException
+     */
+    public function testGetTeamFormationResponse($apiResponse, $expectedDisqualifiedCount, $expectedDisqualified)
+    {
+        /** @var GetTeamFormationResponse $response */
+        $response = ResponseParser::create($apiResponse, ResponseParser::GET_TEAM_FORMATION);
+        $this->assertSame($expectedDisqualifiedCount, count($response->getTeamFormationModel()->getDisqualified()));
+        $this->assertSame($expectedDisqualified, $response->getTeamFormationModel()->getDisqualified()[0]->getName());
+    }
+
     /**
      * @throws NotFoundResponseTypeException
      */
