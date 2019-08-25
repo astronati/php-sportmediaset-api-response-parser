@@ -21,6 +21,15 @@ class MatchModel
         $this->apiResponse = $apiResponse;
     }
 
+    public function getDateTime(): \DateTime
+    {
+        return \DateTime::createFromFormat(
+            self::DATE_FORMAT . ' ' . self::TIME_FORMAT,
+            "{$this->getDate()} {$this->getTime()}",
+            new \DateTimeZone('Europe/Rome')
+        );
+    }
+
     public function getDate(): string
     {
         // The date format is: d/m/Y
