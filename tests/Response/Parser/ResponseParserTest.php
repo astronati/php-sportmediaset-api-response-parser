@@ -18,7 +18,7 @@ class ResponseParserTest extends TestCase
                     'titolari' => ['content' => ['Tables' => [['Rows' => []]]]],
                     'sostituzioni' => ['content' => ['Tables' => [['Rows' => []]]]],
                     'indisponibiliformazione' => 'Nessuno',
-                    'squalificati' => 'Nessuno',
+                    'squalificati' => 'nessuno',
                 ],
                 ResponseParser::GET_TEAM_FORMATION,
                 GetTeamFormationResponse::class
