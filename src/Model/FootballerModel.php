@@ -15,6 +15,11 @@ class FootballerModel
     private $number;
 
     /**
+     * @var int|null
+     */
+    private $disqualificationDays;
+
+    /**
      * @var string
      */
     private $status;
@@ -60,6 +65,22 @@ class FootballerModel
     public function setNumber(?string $number): void
     {
         $this->number = $number;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getDisqualificationDays(): ?int
+    {
+        return $this->disqualificationDays;
+    }
+
+    /**
+     * @param int $disqualificationDays
+     */
+    public function setDisqualificationDays(int $disqualificationDays): void
+    {
+        $this->disqualificationDays = $disqualificationDays;
     }
 
     /**
