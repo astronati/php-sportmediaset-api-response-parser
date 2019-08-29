@@ -50,7 +50,7 @@ class ResponseParser
                 if (array_key_exists('squalificati', $apiResponse) && strtolower($apiResponse['squalificati']) != 'nessuno') {
                     foreach (explode(',', $apiResponse['squalificati']) as $footballerName) {
                         if ($footballerName && trim($footballerName)) {
-                            $disqualified[] = FootballerParser::parse(trim($footballerName));
+                            $disqualified[] = DisqualifiedFootballerParser::parse(trim($footballerName));
                         }
                     }
                 }
