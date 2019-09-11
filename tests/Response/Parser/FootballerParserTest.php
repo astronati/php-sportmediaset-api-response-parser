@@ -12,13 +12,22 @@ class FootballerParserTest extends TestCase
         return [
             [
                 ['numero-maglia' => 1, 'giocatore' => 'Andrea'],
+                false,
                 'Andrea',
                 '1'
             ],
             [
 
                 'Andrea',
+                false,
                 'Andrea',
+                null
+            ],
+            [
+
+                '',
+                true,
+                null,
                 null
             ],
         ];
@@ -27,13 +36,18 @@ class FootballerParserTest extends TestCase
     /**
      * @dataProvider dataProvider
      * @param array $data
+     * @param bool $expectedNullableValue
      * @param string $expectedName
      * @param string $expectedNUmber
      */
-    public function testGetResponse($data, $expectedName, $expectedNUmber)
+    public function testGetResponse($data, $expectedNullableValue, $expectedName, $expectedNUmber)
     {
         $footballer = FootballerParser::parse($data);
-        $this->assertSame($expectedName, $footballer->getName());
-        $this->assertSame($expectedNUmber, $footballer->getNumber());
+        if (!$expectedNullableValue) {
+            $this->assertSame($expectedName, $footballer->getName());
+            $this->assertSame($expectedNUmber, $footballer->getNumber());
+        } else {
+          $this->assertNull($footballer);
+        }
     }
 }

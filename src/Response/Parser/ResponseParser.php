@@ -26,21 +26,25 @@ class ResponseParser
                 $teamFormationModel = new TeamFormationModel($apiResponse);
                 $firstStrings = [];
                 foreach ($apiResponse['titolari']['content']['Tables'][0]['Rows'] as $footballer) {
-                    $firstStrings[] = FootballerParser::parse($footballer);
+                    if ($firstString = FootballerParser::parse($footballer)) {
+                        $firstStrings[] = $firstString;
+                    }
                 }
                 $teamFormationModel->setFirstStrings($firstStrings);
 
                 $reserves = [];
                 foreach ($apiResponse['sostituzioni']['content']['Tables'][0]['Rows'] as $footballer) {
-                    $reserves[] = FootballerParser::parse($footballer);
+                    if ($reserve = FootballerParser::parse($footballer)) {
+                        $reserves[] = $reserve;
+                    }
                 }
                 $teamFormationModel->setReserves($reserves);
 
                 $unavailables = [];
                 if (array_key_exists('indisponibiliformazione', $apiResponse) && strtolower($apiResponse['indisponibiliformazione']) != 'nessuno') {
                     foreach (explode(',', $apiResponse['indisponibiliformazione']) as $footballerName) {
-                        if ($footballerName && trim($footballerName)) {
-                            $unavailables[] = FootballerParser::parse(trim($footballerName));
+                        if ($unavailable = FootballerParser::parse($footballerName)) {
+                            $unavailables[] = $unavailable;
                         }
                     }
                 }
@@ -49,8 +53,8 @@ class ResponseParser
                 $disqualified = [];
                 if (array_key_exists('squalificati', $apiResponse) && strtolower($apiResponse['squalificati']) != 'nessuno') {
                     foreach (explode(',', $apiResponse['squalificati']) as $footballerName) {
-                        if ($footballerName && trim($footballerName)) {
-                            $disqualified[] = DisqualifiedFootballerParser::parse(trim($footballerName));
+                        if ($disqualifiedFootballer = FootballerParser::parse($footballerName)) {
+                            $disqualified[] = $disqualifiedFootballer;
                         }
                     }
                 }
