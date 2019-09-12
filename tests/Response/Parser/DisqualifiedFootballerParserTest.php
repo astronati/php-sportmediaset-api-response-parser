@@ -20,6 +20,11 @@ class DisqualifiedFootballerParserTest extends TestCase
                 'Andrea',
                 1
             ],
+            [
+                'Balotelli (2)',
+                'Balotelli',
+                2
+            ]
         ];
     }
 
