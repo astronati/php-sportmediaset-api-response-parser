@@ -25,16 +25,16 @@ class ResponseParser
             case self::GET_TEAM_FORMATION:
                 $teamFormationModel = new TeamFormationModel($apiResponse);
                 $firstStrings = [];
-                foreach ($apiResponse['titolari']['content']['Tables'][0]['Rows'] as $footballer) {
-                    if ($firstString = FootballerParser::parse($footballer)) {
+                foreach ($apiResponse['titolari']['content']['Tables'][0]['Rows'] as $footballerData) {
+                    if ($firstString = FootballerParser::parse($footballerData)) {
                         $firstStrings[] = $firstString;
                     }
                 }
                 $teamFormationModel->setFirstStrings($firstStrings);
 
                 $reserves = [];
-                foreach ($apiResponse['sostituzioni']['content']['Tables'][0]['Rows'] as $footballer) {
-                    if ($reserve = FootballerParser::parse($footballer)) {
+                foreach ($apiResponse['sostituzioni']['content']['Tables'][0]['Rows'] as $footballerData) {
+                    if ($reserve = FootballerParser::parse($footballerData)) {
                         $reserves[] = $reserve;
                     }
                 }
@@ -42,8 +42,8 @@ class ResponseParser
 
                 $unavailables = [];
                 if (array_key_exists('indisponibiliformazione', $apiResponse) && strtolower($apiResponse['indisponibiliformazione']) != 'nessuno') {
-                    foreach (explode(',', $apiResponse['indisponibiliformazione']) as $footballerName) {
-                        if ($unavailable = FootballerParser::parse($footballerName)) {
+                    foreach (explode(',', $apiResponse['indisponibiliformazione']) as $footballerData) {
+                        if ($unavailable = FootballerParser::parse($footballerData)) {
                             $unavailables[] = $unavailable;
                         }
                     }
@@ -52,8 +52,8 @@ class ResponseParser
 
                 $disqualified = [];
                 if (array_key_exists('squalificati', $apiResponse) && strtolower($apiResponse['squalificati']) != 'nessuno') {
-                    foreach (explode(',', $apiResponse['squalificati']) as $footballerName) {
-                        if ($disqualifiedFootballer = DisqualifiedFootballerParser::parse($footballerName)) {
+                    foreach (explode(',', $apiResponse['squalificati']) as $footballerData) {
+                        if ($disqualifiedFootballer = DisqualifiedFootballerParser::parse($footballerData)) {
                             $disqualified[] = $disqualifiedFootballer;
                         }
                     }
@@ -63,8 +63,8 @@ class ResponseParser
                 return new GetTeamFormationResponse($teamFormationModel);
             case self::GET_MATCHES:
                 $matchModels = [];
-                foreach ($apiResponse['content']['Tables'][0]['Rows'] as $match) {
-                    $matchModels[] = new MatchModel($match);
+                foreach ($apiResponse['content']['Tables'][0]['Rows'] as $matchData) {
+                    $matchModels[] = MatchParser::parse($matchData);
                 }
                 return new GetMatchesResponse($matchModels);
             default:

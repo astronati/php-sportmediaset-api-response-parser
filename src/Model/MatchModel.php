@@ -4,51 +4,97 @@ namespace SMRP\Model;
 
 class MatchModel
 {
-    const MATCH_DATE_KEY = 'data-partita';
-    const MATCH_TIME_KEY = 'ora-partita';
-    const HOME_TEAM_KEY = 'squadra-casa';
-    const AWAY_TEAM_KEY = 'squadra-trasferta';
     const DATE_FORMAT = 'd/m/Y';
     const TIME_FORMAT = 'H:i';
 
     /**
-     * @var array
+     * @var string
      */
-    private $apiResponse;
+    private $homeTeam;
 
-    public function __construct(array $apiResponse)
+    /**
+     * @var string
+     */
+    private $awayTeam;
+
+    /**
+     * @var \DateTime
+     */
+    private $datetime;
+
+    /**
+     * @var TeamFormationModel
+     */
+    private $homeFormation;
+
+    /**
+     * @var TeamFormationModel
+     */
+    private $awayFormation;
+
+    public function __construct(string $homeTeam, string $awayTeam, \DateTime $datetime)
     {
-        $this->apiResponse = $apiResponse;
+        $this->homeTeam = $homeTeam;
+        $this->awayTeam = $awayTeam;
+        $this->datetime = $datetime;
+    }
+
+    public function getHomeTeam(): string
+    {
+        return $this->homeTeam;
+    }
+
+    public function getAwayTeam(): string
+    {
+        return $this->awayTeam;
     }
 
     public function getDateTime(): \DateTime
     {
-        return \DateTime::createFromFormat(
-            self::DATE_FORMAT . ' ' . self::TIME_FORMAT,
-            "{$this->getDate()} {$this->getTime()}",
-            new \DateTimeZone('Europe/Rome')
-        );
+        return $this->datetime;
     }
 
     public function getDate(): string
     {
         // The date format is: d/m/Y
-        return $this->apiResponse[self::MATCH_DATE_KEY];
+        return $this->datetime->format(self::DATE_FORMAT);
     }
 
     public function getTime(): string
     {
         // The date format is: H:i
-        return $this->apiResponse[self::MATCH_TIME_KEY];
+        return $this->datetime->format(self::TIME_FORMAT);
     }
 
-    public function getHomeTeam(): string
+    /**
+     * @return TeamFormationModel|null
+     */
+    public function getHomeFormation(): ?TeamFormationModel
     {
-        return $this->apiResponse[self::HOME_TEAM_KEY];
+        return $this->homeFormation;
     }
 
-    public function getAwayTeam(): string
+    /**
+     * @param TeamFormationModel $homeFormation
+     */
+    public function setHomeFormation(TeamFormationModel $homeFormation): void
     {
-        return $this->apiResponse[self::AWAY_TEAM_KEY];
+        $this->homeFormation = $homeFormation;
+    }
+
+    /**
+     * @return TeamFormationModel|null
+     */
+    public function getAwayFormation(): ?TeamFormationModel
+    {
+        return $this->awayFormation;
+    }
+
+    /**
+     * @param TeamFormationModel $awayFormation
+     */
+    public function setAwayFormation(TeamFormationModel $awayFormation): void
+    {
+        $this->awayFormation = $awayFormation;
     }
 }
