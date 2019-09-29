@@ -56,7 +56,8 @@ class ResponseParserTest extends TestCase
                     'squalificati' => 'Ter Stegen (2),',
                 ],
                 1,
-                'Ter Stegen'
+                'Ter Stegen',
+                0
             ],
         ];
     }
@@ -66,14 +67,16 @@ class ResponseParserTest extends TestCase
      * @param array $apiResponse
      * @param int $expectedDisqualifiedCount
      * @param string $expectedDisqualified
+     * @param int $expectedUnavailableCount
      * @throws NotFoundResponseTypeException
      */
-    public function testGetTeamFormationResponse($apiResponse, $expectedDisqualifiedCount, $expectedDisqualified)
+    public function testGetTeamFormationResponse($apiResponse, $expectedDisqualifiedCount, $expectedDisqualified, $expectedUnavailableCount)
     {
         /** @var GetTeamFormationResponse $response */
         $response = ResponseParser::create($apiResponse, ResponseParser::GET_TEAM_FORMATION);
         $this->assertSame($expectedDisqualifiedCount, count($response->getTeamFormationModel()->getDisqualified()));
         $this->assertSame($expectedDisqualified, $response->getTeamFormationModel()->getDisqualified()[0]->getName());
+        $this->assertSame($expectedUnavailableCount, count($response->getTeamFormationModel()->getUnavailables()));
     }
 
     /**
