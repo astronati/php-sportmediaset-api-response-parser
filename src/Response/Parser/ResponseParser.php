@@ -41,7 +41,10 @@ class ResponseParser
                 $teamFormationModel->setReserves($reserves);
 
                 $unavailables = [];
-                if (array_key_exists('indisponibiliformazione', $apiResponse) && strpos(strtolower($apiResponse['indisponibiliformazione']), 'nessuno') === false) {
+                if (array_key_exists('indisponibiliformazione', $apiResponse)
+                        && strpos(strtolower($apiResponse['indisponibiliformazione']), 'nessuno') === false
+                        && strtolower($apiResponse['indisponibiliformazione']) != '-'
+                ) {
                     foreach (explode(',', $apiResponse['indisponibiliformazione']) as $footballerData) {
                         if ($unavailable = FootballerParser::parse($footballerData)) {
                             $unavailables[] = $unavailable;
@@ -51,7 +54,10 @@ class ResponseParser
                 $teamFormationModel->setUnavailables($unavailables);
 
                 $disqualified = [];
-                if (array_key_exists('squalificati', $apiResponse) && strpos(strtolower($apiResponse['squalificati']), 'nessuno') === false) {
+                if (array_key_exists('squalificati', $apiResponse)
+                        && strpos(strtolower($apiResponse['squalificati']), 'nessuno') === false
+                        && strtolower($apiResponse['squalificati']) != '-'
+                ) {
                     foreach (explode(',', $apiResponse['squalificati']) as $footballerData) {
                         if ($disqualifiedFootballer = DisqualifiedFootballerParser::parse($footballerData)) {
                             $disqualified[] = $disqualifiedFootballer;
