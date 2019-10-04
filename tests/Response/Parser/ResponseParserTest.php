@@ -52,7 +52,7 @@ class ResponseParserTest extends TestCase
                 [
                     'titolari' => ['content' => ['Tables' => [['Rows' => []]]]],
                     'sostituzioni' => ['content' => ['Tables' => [['Rows' => []]]]],
-                    'indisponibiliformazione' => 'Nessuno',
+                    'indisponibiliformazione' => 'Nessuno, -',
                     'squalificati' => 'Ter Stegen (2),',
                 ],
                 1,
