@@ -33,8 +33,8 @@ class APIResponseTest extends TestCase
 
     public function testGetReserves()
     {
-        $apiResponse = new APIResponse(['sostituzioni' => ['content' => ['Tables' => [['Rows' => ['test']]]]]]);
-        $this->assertEquals(['test'], $apiResponse->getReserves());
+        $apiResponse = new APIResponse(['sostituzioni' => ['content' => ['Tables' => [['Rows' => ['test', 'andrea. giovanni']]]]]]);
+        $this->assertEquals(['test', 'andrea', 'giovanni'], $apiResponse->getReserves());
     }
 
     public function getUnavailableDataProvider()
@@ -92,6 +92,10 @@ class APIResponseTest extends TestCase
             [
                 ['squalificati' => 'nome footballer, altro nome footballer'],
                 ['nome footballer', 'altro nome footballer']
+            ],
+            [
+                ['squalificati' => 'nome footballer, FARAGò. PAVOLETTI, ANDREA M.'],
+                ['nome footballer', 'FARAGò', 'PAVOLETTI', 'ANDREA M.']
             ],
         ];
     }

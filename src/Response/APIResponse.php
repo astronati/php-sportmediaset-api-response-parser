@@ -31,7 +31,11 @@ class APIResponse
 
     public function getReserves(): array
     {
-        return $this->response['sostituzioni']['content']['Tables'][0]['Rows'];
+        $reserves = [];
+        foreach ($this->response['sostituzioni']['content']['Tables'][0]['Rows'] as $data) {
+            $reserves = array_merge($reserves, $this->extractFootballers($data));
+        }
+        return $reserves;
     }
 
     public function getUnavailable(): array
@@ -43,14 +47,7 @@ class APIResponse
             && strtolower($this->response['indisponibiliformazione']) != '-'
         ) {
             foreach (explode(',', $this->response['indisponibiliformazione']) as $data) {
-                $regexMatches = [];
-                preg_match('/^(.*)\. (.{3,})$/', $data, $regexMatches);
-                if (count($regexMatches)) {
-                    $unavailable[] = trim($regexMatches[1]);
-                    $unavailable[] = trim($regexMatches[2]);
-                } else {
-                    $unavailable[] = trim($data);
-                }
+                $unavailable = array_merge($unavailable, $this->extractFootballers($data));
             }
         }
 
@@ -66,11 +63,25 @@ class APIResponse
             && strtolower($this->response['squalificati']) != '-'
         ) {
             foreach (explode(',', $this->response['squalificati']) as $data) {
-                $disqualified[] = trim($data);
+                $disqualified = array_merge($disqualified, $this->extractFootballers($data));
             }
         }
 
         return $disqualified;
+    }
+
+    private function extractFootballers(string $data): array
+    {
+        $regexMatches = [];
+        $footballers = [];
+        preg_match('/^(.*)\. (.{3,})$/', $data, $regexMatches);
+        if (count($regexMatches)) {
+            $footballers[] = trim($regexMatches[1]);
+            $footballers[] = trim($regexMatches[2]);
+        } else {
+            $footballers[] = trim($data);
+        }
+        return $footballers;
     }
 
     public function getMatches(): array
