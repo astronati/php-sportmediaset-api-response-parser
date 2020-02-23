@@ -33,8 +33,8 @@ class APIResponseTest extends TestCase
 
     public function testGetReserves()
     {
-        $apiResponse = new APIResponse(['sostituzioni' => ['content' => ['Tables' => [['Rows' => ['test', 'andrea. giovanni']]]]]]);
-        $this->assertEquals(['test', 'andrea', 'giovanni'], $apiResponse->getReserves());
+        $apiResponse = new APIResponse(['sostituzioni' => ['content' => ['Tables' => [['Rows' => ['test', 'giovanni']]]]]]);
+        $this->assertEquals(['test', 'giovanni'], $apiResponse->getReserves());
     }
 
     public function getUnavailableDataProvider()

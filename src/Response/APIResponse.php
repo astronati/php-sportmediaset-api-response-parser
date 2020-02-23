@@ -31,11 +31,7 @@ class APIResponse
 
     public function getReserves(): array
     {
-        $reserves = [];
-        foreach ($this->response['sostituzioni']['content']['Tables'][0]['Rows'] as $data) {
-            $reserves = array_merge($reserves, $this->extractFootballers($data));
-        }
-        return $reserves;
+        return $this->response['sostituzioni']['content']['Tables'][0]['Rows'];
     }
 
     public function getUnavailable(): array
