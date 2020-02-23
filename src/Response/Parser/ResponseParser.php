@@ -3,8 +3,8 @@
 namespace SMRP\Response\Parser;
 
 use SMRP\Exception\NotFoundResponseTypeException;
-use SMRP\Model\MatchModel;
 use SMRP\Model\TeamFormationModel;
+use SMRP\Response\APIResponse;
 use SMRP\Response\GetMatchesResponse;
 use SMRP\Response\GetTeamFormationResponse;
 
@@ -14,18 +14,19 @@ class ResponseParser
     const GET_MATCHES = 2;
 
     /**
-     * @param array $apiResponse The response from the API
+     * @param array $response The response from the API
      * @param int $type
      * @return mixed
      * @throws NotFoundResponseTypeException When the type is not allowed
      */
-    public static function create(array $apiResponse, $type)
+    public static function create(array $response, $type)
     {
+        $apiResponse = new APIResponse($response);
         switch ($type) {
             case self::GET_TEAM_FORMATION:
-                $teamFormationModel = new TeamFormationModel($apiResponse);
+                $teamFormationModel = new TeamFormationModel($apiResponse->getCoach(), $apiResponse->getModule());
                 $firstStrings = [];
-                foreach ($apiResponse['titolari']['content']['Tables'][0]['Rows'] as $footballerData) {
+                foreach ($apiResponse->getFirstStrings() as $footballerData) {
                     if ($firstString = FootballerParser::parse($footballerData)) {
                         $firstStrings[] = $firstString;
                     }
@@ -33,35 +34,25 @@ class ResponseParser
                 $teamFormationModel->setFirstStrings($firstStrings);
 
                 $reserves = [];
-                foreach ($apiResponse['sostituzioni']['content']['Tables'][0]['Rows'] as $footballerData) {
+                foreach ($apiResponse->getReserves() as $footballerData) {
                     if ($reserve = FootballerParser::parse($footballerData)) {
                         $reserves[] = $reserve;
                     }
                 }
                 $teamFormationModel->setReserves($reserves);
 
-                $unavailables = [];
-                if (array_key_exists('indisponibiliformazione', $apiResponse)
-                        && strpos(strtolower($apiResponse['indisponibiliformazione']), 'nessuno') === false
-                        && strtolower($apiResponse['indisponibiliformazione']) != '-'
-                ) {
-                    foreach (explode(',', $apiResponse['indisponibiliformazione']) as $footballerData) {
-                        if ($unavailable = FootballerParser::parse($footballerData)) {
-                            $unavailables[] = $unavailable;
-                        }
+                $unavailable = [];
+                foreach ($apiResponse->getUnavailable() as $footballerData) {
+                    if ($unavailableFootballer = FootballerParser::parse($footballerData)) {
+                        $unavailable[] = $unavailableFootballer;
                     }
                 }
-                $teamFormationModel->setUnavailables($unavailables);
+                $teamFormationModel->setUnavailable($unavailable);
 
                 $disqualified = [];
-                if (array_key_exists('squalificati', $apiResponse)
-                        && strpos(strtolower($apiResponse['squalificati']), 'nessuno') === false
-                        && strtolower($apiResponse['squalificati']) != '-'
-                ) {
-                    foreach (explode(',', $apiResponse['squalificati']) as $footballerData) {
-                        if ($disqualifiedFootballer = DisqualifiedFootballerParser::parse($footballerData)) {
-                            $disqualified[] = $disqualifiedFootballer;
-                        }
+                foreach ($apiResponse->getDisqualified() as $footballerData) {
+                    if ($disqualifiedFootballer = DisqualifiedFootballerParser::parse($footballerData)) {
+                        $disqualified[] = $disqualifiedFootballer;
                     }
                 }
                 $teamFormationModel->setDisqualified($disqualified);
@@ -69,12 +60,12 @@ class ResponseParser
                 return new GetTeamFormationResponse($teamFormationModel);
             case self::GET_MATCHES:
                 $matchModels = [];
-                foreach ($apiResponse['content']['Tables'][0]['Rows'] as $matchData) {
+                foreach ($apiResponse->getMatches() as $matchData) {
                     $matchModels[] = MatchParser::parse($matchData);
                 }
                 return new GetMatchesResponse($matchModels);
             default:
-                throw new NotFoundResponseTypeException('Response type not found');
+                throw new NotFoundResponseTypeException("{$type} is not a valid response type");
         }
     }
 }

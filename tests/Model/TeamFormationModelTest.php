@@ -11,42 +11,40 @@ class TeamFormationModelTest extends TestCase
     public function getCoachDataProvider()
     {
         return [
-            [['allenatore' => 'Sarri'], 'Sarri'],
+            ['Sarri'],
         ];
     }
 
     /**
      * @dataProvider getCoachDataProvider
-     * @param array $apiResponse
-     * @param string $expectedResult
+     * @param string $coach
      */
-    public function testGetCoach($apiResponse, $expectedResult)
+    public function testGetCoach($coach)
     {
-        $teamFormationModel = new TeamFormationModel($apiResponse);
-        $this->assertEquals($expectedResult, $teamFormationModel->getCoach());
+        $teamFormationModel = new TeamFormationModel($coach, '');
+        $this->assertEquals($coach, $teamFormationModel->getCoach());
     }
 
     public function getModuleDataProvider()
     {
         return [
-            [['modulo' => '4-3-3'], '4-3-3'],
+            ['4-3-3'],
         ];
     }
 
     /**
      * @dataProvider getModuleDataProvider
-     * @param array $apiResponse
-     * @param string $expectedResult
+     * @param string $module
      */
-    public function testGetModule($apiResponse, $expectedResult)
+    public function testGetModule($module)
     {
-        $teamFormationModel = new TeamFormationModel($apiResponse);
-        $this->assertEquals($expectedResult, $teamFormationModel->getModule());
+        $teamFormationModel = new TeamFormationModel('Sarri', '4-3-3');
+        $this->assertEquals($module, $teamFormationModel->getModule());
     }
 
     public function testGetFirstStrings()
     {
-        $teamFormationModel = new TeamFormationModel([]);
+        $teamFormationModel = new TeamFormationModel('Sarri', '4-3-3');
         $teamFormationModel->setFirstStrings([new FootballerModel('andrea')]);
         $this->assertEquals(1, count($teamFormationModel->getFirstStrings()));
         $this->assertEquals(0, $teamFormationModel->getFirstStrings()[0]->getPosition());
@@ -55,25 +53,25 @@ class TeamFormationModelTest extends TestCase
 
     public function testGetReserves()
     {
-        $teamFormationModel = new TeamFormationModel([]);
+        $teamFormationModel = new TeamFormationModel('Sarri', '4-3-3');
         $teamFormationModel->setReserves([new FootballerModel('andrea')]);
         $this->assertEquals(1, count($teamFormationModel->getReserves()));
         $this->assertEquals(0, $teamFormationModel->getReserves()[0]->getPosition());
         $this->assertEquals('RESERVE', $teamFormationModel->getReserves()[0]->getStatus());
     }
 
-    public function testGetUnavailables()
+    public function testGetUnavailable()
     {
-        $teamFormationModel = new TeamFormationModel([]);
-        $teamFormationModel->setUnavailables([new FootballerModel('andrea')]);
-        $this->assertEquals(1, count($teamFormationModel->getUnavailables()));
-        $this->assertEquals(0, $teamFormationModel->getUnavailables()[0]->getPosition());
-        $this->assertEquals('UNAVAILABLE', $teamFormationModel->getUnavailables()[0]->getStatus());
+        $teamFormationModel = new TeamFormationModel('Sarri', '4-3-3');
+        $teamFormationModel->setUnavailable([new FootballerModel('andrea')]);
+        $this->assertEquals(1, count($teamFormationModel->getUnavailable()));
+        $this->assertEquals(0, $teamFormationModel->getUnavailable()[0]->getPosition());
+        $this->assertEquals('UNAVAILABLE', $teamFormationModel->getUnavailable()[0]->getStatus());
     }
 
     public function testGetDisqualified()
     {
-        $teamFormationModel = new TeamFormationModel([]);
+        $teamFormationModel = new TeamFormationModel('Sarri', '4-3-3');
         $teamFormationModel->setDisqualified([new FootballerModel('andrea')]);
         $this->assertEquals(1, count($teamFormationModel->getDisqualified()));
         $this->assertEquals(0, $teamFormationModel->getDisqualified()[0]->getPosition());

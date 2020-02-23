@@ -8,12 +8,12 @@ class DisqualifiedFootballerParser
 {
     public static function parse($footballerData): ?FootballerModel
     {
-        $matches = [];
-        preg_match('/^(.*) \((\d+)\)$/', $footballerData, $matches);
-        if (count($matches)) {
-            $footballer = FootballerParser::parse($matches[1]);
+        $regexMatches = [];
+        preg_match('/^(.*) \((\d+)\)$/', $footballerData, $regexMatches);
+        if (count($regexMatches)) {
+            $footballer = FootballerParser::parse($regexMatches[1]);
             if ($footballer) {
-                $footballer->setDisqualificationDays($matches[2]);
+                $footballer->setDisqualificationDays($regexMatches[2]);
             }
         }
         else {
