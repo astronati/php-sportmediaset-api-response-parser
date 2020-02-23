@@ -10,11 +10,13 @@ use SMRP\Response\Parser\ResponseParser;
 
 class ResponseParserTest extends TestCase
 {
-    public function dataProvider()
+    public function getResponseDataProvider()
     {
         return [
             [
                 [
+                    'allenatore' => 'Sarri',
+                    'modulo' => '4-3-3',
                     'titolari' => ['content' => ['Tables' => [['Rows' => []]]]],
                     'sostituzioni' => ['content' => ['Tables' => [['Rows' => []]]]],
                     'indisponibiliformazione' => 'Nessuno',
@@ -33,7 +35,7 @@ class ResponseParserTest extends TestCase
     }
 
     /**
-     * @dataProvider dataProvider
+     * @dataProvider getResponseDataProvider
      * @param array $apiResponse
      * @param int $type
      * @param string $expectedClass
@@ -50,6 +52,8 @@ class ResponseParserTest extends TestCase
         return [
             [
                 [
+                    'allenatore' => 'Sarri',
+                    'modulo' => '4-3-3',
                     'titolari' => ['content' => ['Tables' => [['Rows' => []]]]],
                     'sostituzioni' => ['content' => ['Tables' => [['Rows' => []]]]],
                     'indisponibiliformazione' => 'Nessuno, -',
@@ -76,7 +80,7 @@ class ResponseParserTest extends TestCase
         $response = ResponseParser::create($apiResponse, ResponseParser::GET_TEAM_FORMATION);
         $this->assertSame($expectedDisqualifiedCount, count($response->getTeamFormationModel()->getDisqualified()));
         $this->assertSame($expectedDisqualified, $response->getTeamFormationModel()->getDisqualified()[0]->getName());
-        $this->assertSame($expectedUnavailableCount, count($response->getTeamFormationModel()->getUnavailables()));
+        $this->assertSame($expectedUnavailableCount, count($response->getTeamFormationModel()->getUnavailable()));
     }
 
     /**

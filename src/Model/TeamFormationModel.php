@@ -4,18 +4,20 @@ namespace SMRP\Model;
 
 class TeamFormationModel
 {
-    const COACH_KEY = 'allenatore';
-    const MODULE_KEY = 'modulo';
-
     const FIRST_STRING = 'FIRST_STRING';
     const RESERVE = 'RESERVE';
     const UNAVAILABLE = 'UNAVAILABLE';
     const DISQUALIFIED = 'DISQUALIFIED';
 
     /**
-     * @var array
+     * @var string
      */
-    private $apiResponse;
+    private $coach;
+
+    /**
+     * @var string
+     */
+    private $module;
 
     /**
      * @var FootballerModel[]
@@ -30,26 +32,27 @@ class TeamFormationModel
     /**
      * @var FootballerModel[]
      */
-    private $unavailables = [];
+    private $unavailable = [];
 
     /**
      * @var FootballerModel[]
      */
     private $disqualified = [];
 
-    public function __construct(array $apiResponse)
+    public function __construct(string $coach, string $module)
     {
-        $this->apiResponse = $apiResponse;
+        $this->coach = $coach;
+        $this->module = $module;
     }
 
     public function getCoach(): string
     {
-        return $this->apiResponse[self::COACH_KEY];
+        return $this->coach;
     }
 
     public function getModule(): string
     {
-        return $this->apiResponse[self::MODULE_KEY];
+        return $this->module;
     }
 
     /**
@@ -95,20 +98,20 @@ class TeamFormationModel
     /**
      * @return FootballerModel[]
      */
-    public function getUnavailables(): array
+    public function getUnavailable(): array
     {
-        return $this->unavailables;
+        return $this->unavailable;
     }
 
     /**
-     * @param FootballerModel[] $unavailables
+     * @param FootballerModel[] $unavailable
      */
-    public function setUnavailables(array $unavailables): void
+    public function setUnavailable(array $unavailable): void
     {
-        foreach ($unavailables as $index => $unavailable) {
-            $unavailable->setPosition($index);
-            $unavailable->setStatus(self::UNAVAILABLE);
-            $this->unavailables[] = $unavailable;
+        foreach ($unavailable as $index => $unavailableFootballer) {
+            $unavailableFootballer->setPosition($index);
+            $unavailableFootballer->setStatus(self::UNAVAILABLE);
+            $this->unavailable[] = $unavailableFootballer;
         }
     }
 
