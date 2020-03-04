@@ -14,7 +14,7 @@ class APIResponse
         $this->response = $response;
     }
 
-    public function getCoach(): string
+    public function getCoach(): ?string
     {
         return $this->response['allenatore'];
     }

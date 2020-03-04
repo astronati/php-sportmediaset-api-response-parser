@@ -12,12 +12,12 @@ class TeamFormationModel
     /**
      * @var string
      */
-    private $coach;
+    private $module;
 
     /**
-     * @var string
+     * @var string|null
      */
-    private $module;
+    private $coach;
 
     /**
      * @var FootballerModel[]
@@ -39,13 +39,13 @@ class TeamFormationModel
      */
     private $disqualified = [];
 
-    public function __construct(string $coach, string $module)
+    public function __construct(string $module, ?string $coach)
     {
         $this->coach = $coach;
         $this->module = $module;
     }
 
-    public function getCoach(): string
+    public function getCoach(): ?string
     {
         return $this->coach;
     }
