@@ -24,7 +24,7 @@ class ResponseParser
         $apiResponse = new APIResponse($response);
         switch ($type) {
             case self::GET_TEAM_FORMATION:
-                $teamFormationModel = new TeamFormationModel($apiResponse->getCoach(), $apiResponse->getModule());
+                $teamFormationModel = new TeamFormationModel($apiResponse->getModule(), $apiResponse->getCoach());
                 $firstStrings = [];
                 foreach ($apiResponse->getFirstStrings() as $footballerData) {
                     if ($firstString = FootballerParser::parse($footballerData)) {

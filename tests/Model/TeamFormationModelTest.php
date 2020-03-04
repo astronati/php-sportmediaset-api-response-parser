@@ -21,7 +21,7 @@ class TeamFormationModelTest extends TestCase
      */
     public function testGetCoach($coach)
     {
-        $teamFormationModel = new TeamFormationModel($coach, '');
+        $teamFormationModel = new TeamFormationModel('', $coach);
         $this->assertEquals($coach, $teamFormationModel->getCoach());
     }
 
@@ -38,13 +38,13 @@ class TeamFormationModelTest extends TestCase
      */
     public function testGetModule($module)
     {
-        $teamFormationModel = new TeamFormationModel('Sarri', '4-3-3');
+        $teamFormationModel = new TeamFormationModel('4-3-3', 'Sarri');
         $this->assertEquals($module, $teamFormationModel->getModule());
     }
 
     public function testGetFirstStrings()
     {
-        $teamFormationModel = new TeamFormationModel('Sarri', '4-3-3');
+        $teamFormationModel = new TeamFormationModel('4-3-3', 'Sarri');
         $teamFormationModel->setFirstStrings([new FootballerModel('andrea')]);
         $this->assertEquals(1, count($teamFormationModel->getFirstStrings()));
         $this->assertEquals(0, $teamFormationModel->getFirstStrings()[0]->getPosition());
@@ -53,7 +53,7 @@ class TeamFormationModelTest extends TestCase
 
     public function testGetReserves()
     {
-        $teamFormationModel = new TeamFormationModel('Sarri', '4-3-3');
+        $teamFormationModel = new TeamFormationModel('4-3-3', 'Sarri');
         $teamFormationModel->setReserves([new FootballerModel('andrea')]);
         $this->assertEquals(1, count($teamFormationModel->getReserves()));
         $this->assertEquals(0, $teamFormationModel->getReserves()[0]->getPosition());
@@ -62,7 +62,7 @@ class TeamFormationModelTest extends TestCase
 
     public function testGetUnavailable()
     {
-        $teamFormationModel = new TeamFormationModel('Sarri', '4-3-3');
+        $teamFormationModel = new TeamFormationModel('4-3-3', 'Sarri');
         $teamFormationModel->setUnavailable([new FootballerModel('andrea')]);
         $this->assertEquals(1, count($teamFormationModel->getUnavailable()));
         $this->assertEquals(0, $teamFormationModel->getUnavailable()[0]->getPosition());
@@ -71,7 +71,7 @@ class TeamFormationModelTest extends TestCase
 
     public function testGetDisqualified()
     {
-        $teamFormationModel = new TeamFormationModel('Sarri', '4-3-3');
+        $teamFormationModel = new TeamFormationModel('4-3-3', 'Sarri');
         $teamFormationModel->setDisqualified([new FootballerModel('andrea')]);
         $this->assertEquals(1, count($teamFormationModel->getDisqualified()));
         $this->assertEquals(0, $teamFormationModel->getDisqualified()[0]->getPosition());
