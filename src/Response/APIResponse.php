@@ -57,6 +57,7 @@ class APIResponse
         if (array_key_exists('squalificati', $this->response)
             && strpos(strtolower($this->response['squalificati']), 'nessuno') === false
             && strtolower($this->response['squalificati']) != '-'
+            && strtolower($this->response['squalificati']) != '-\n'
         ) {
             foreach (explode(',', $this->response['squalificati']) as $data) {
                 $disqualified = array_merge($disqualified, $this->extractFootballers($data));
