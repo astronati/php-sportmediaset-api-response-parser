@@ -82,7 +82,7 @@ class APIResponseTest extends TestCase
                 []
             ],
             [
-                ['squalificati' => 'Nessuno, -'],
+                ['squalificati' => 'Nessuno, -, -\n'],
                 []
             ],
             [
