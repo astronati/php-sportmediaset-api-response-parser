@@ -57,6 +57,10 @@ class APIResponseTest extends TestCase
                 ['nome footballer', 'altro nome footballer']
             ],
             [
+                ['indisponibiliformazione' => 'Musacchio, Duarte, Castillejo, A. Donnarumma\n'],
+                ['Musacchio', 'Duarte', 'Castillejo', 'A. Donnarumma']
+            ],
+            [
                 ['indisponibiliformazione' => 'nome footballer, FARAGò. PAVOLETTI, ANDREA M.'],
                 ['nome footballer', 'FARAGò', 'PAVOLETTI', 'ANDREA M.']
             ],

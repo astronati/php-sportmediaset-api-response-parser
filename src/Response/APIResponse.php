@@ -42,7 +42,8 @@ class APIResponse
             && strpos(strtolower($this->response['indisponibiliformazione']), 'nessuno') === false
             && strtolower($this->response['indisponibiliformazione']) != '-'
         ) {
-            foreach (explode(',', $this->response['indisponibiliformazione']) as $data) {
+            $responseUnavailable = str_replace('\n', '', $this->response['indisponibiliformazione']);
+            foreach (explode(',', $responseUnavailable) as $data) {
                 $unavailable = array_merge($unavailable, $this->extractFootballers($data));
             }
         }
@@ -57,9 +58,9 @@ class APIResponse
         if (array_key_exists('squalificati', $this->response)
             && strpos(strtolower($this->response['squalificati']), 'nessuno') === false
             && strtolower($this->response['squalificati']) != '-'
-            && strtolower($this->response['squalificati']) != '-\n'
         ) {
-            foreach (explode(',', $this->response['squalificati']) as $data) {
+            $responseDisqualified = str_replace('\n', '', $this->response['squalificati']);
+            foreach (explode(',', $responseDisqualified) as $data) {
                 $disqualified = array_merge($disqualified, $this->extractFootballers($data));
             }
         }
@@ -71,7 +72,7 @@ class APIResponse
     {
         $regexMatches = [];
         $footballers = [];
-        preg_match('/^(.*)\. (.{3,})$/', $data, $regexMatches);
+        preg_match('/^(.{2,})\. (.{3,})$/', trim($data), $regexMatches);
         if (count($regexMatches)) {
             $footballers[] = trim($regexMatches[1]);
             $footballers[] = trim($regexMatches[2]);
