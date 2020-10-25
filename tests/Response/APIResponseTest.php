@@ -64,6 +64,10 @@ class APIResponseTest extends TestCase
                 ['indisponibiliformazione' => 'nome footballer, FARAGò. PAVOLETTI, ANDREA M.'],
                 ['nome footballer', 'FARAGò', 'PAVOLETTI', 'ANDREA M.']
             ],
+            [
+                ['indisponibiliformazione' => 'ZANIOLO PEROTTI'],
+                ['ZANIOLO PEROTTI']
+            ],
         ];
     }
 
