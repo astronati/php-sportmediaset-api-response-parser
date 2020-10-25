@@ -67,6 +67,11 @@ class FootballerModel
         $this->number = $number;
     }
 
+    public function hasNumber(): bool
+    {
+        return $this->number != null;
+    }
+
     /**
      * @return int|null
      */

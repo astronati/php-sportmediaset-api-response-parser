@@ -17,14 +17,18 @@ class FootballerParserTest extends TestCase
                 '1'
             ],
             [
-
                 'Andrea',
                 false,
                 'Andrea',
                 null
             ],
             [
-
+                'ZANIOLO PEROTTI',
+                false,
+                'ZANIOLO PEROTTI',
+                null
+            ],
+            [
                 '',
                 true,
                 null,

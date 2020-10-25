@@ -20,6 +20,25 @@ class FootballerModelTest extends TestCase
         $this->assertEquals(3, $footballerModel->getNumber());
     }
 
+    public function hasNumberDataProvider()
+    {
+        return [
+            ["1", true],
+            [null, false],
+        ];
+    }
+
+    /**
+     * @dataProvider hasNumberDataProvider
+     * @param string|null $hasNumber
+     * @param bool $expectedResult
+     */
+    public function testHasNumber($hasNumber, $expectedResult)
+    {
+        $footballerModel = new FootballerModel('Andrea', $hasNumber);
+        $this->assertEquals($expectedResult, $footballerModel->hasNumber());
+    }
+
     public function testGetName()
     {
         $footballerModel = new FootballerModel('Andrea', 1);
