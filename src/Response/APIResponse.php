@@ -42,7 +42,11 @@ class APIResponse
             && strpos(strtolower($this->response['indisponibiliformazione']), 'nessuno') === false
             && strtolower($this->response['indisponibiliformazione']) != '-'
         ) {
-            $responseUnavailable = str_replace('\n', '', $this->response['indisponibiliformazione']);
+            $responseUnavailable = str_replace(
+                ' e ',
+                ', ',
+                str_replace('\n', '', $this->response['indisponibiliformazione'])
+            );
             foreach (explode(',', $responseUnavailable) as $data) {
                 $unavailable = array_merge($unavailable, $this->extractFootballers($data));
             }
