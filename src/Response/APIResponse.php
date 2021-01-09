@@ -40,7 +40,7 @@ class APIResponse
 
         if (array_key_exists('indisponibiliformazione', $this->response)
             && strpos(strtolower($this->response['indisponibiliformazione']), 'nessuno') === false
-            && strtolower($this->response['indisponibiliformazione']) != '-'
+            && trim(strtolower($this->response['indisponibiliformazione'])) != '-'
         ) {
             $responseUnavailable = str_replace(
                 ' e ',

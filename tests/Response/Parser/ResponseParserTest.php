@@ -63,6 +63,19 @@ class ResponseParserTest extends TestCase
                 'Ter Stegen',
                 0
             ],
+            [
+                [
+                    'allenatore' => 'Sarri',
+                    'modulo' => '4-3-3',
+                    'titolari' => ['content' => ['Tables' => [['Rows' => []]]]],
+                    'sostituzioni' => ['content' => ['Tables' => [['Rows' => []]]]],
+                    'indisponibiliformazione' => '- ',
+                    'squalificati' => 'Ter Stegen (2),',
+                ],
+                1,
+                'Ter Stegen',
+                0
+            ],
         ];
     }
 
