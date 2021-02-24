@@ -16,7 +16,7 @@ class APIResponse
 
     public function getCoach(): ?string
     {
-        return $this->response['allenatore'];
+        return array_key_exists('allenatore', $this->response) ? $this->response['allenatore'] : null;
     }
 
     public function getModule(): string

@@ -7,10 +7,29 @@ use SMRP\Response\APIResponse;
 
 class APIResponseTest extends TestCase
 {
-    public function testGetCoach()
+    public function coachDataProvider()
     {
-        $apiResponse = new APIResponse(['allenatore' => 'Sarri']);
-        $this->assertSame('Sarri', $apiResponse->getCoach());
+        return [
+            [
+                ['allenatore' => 'Sarri'],
+                'Sarri'
+            ],
+            [
+                ['indisponibiliformazione' => 'Nessuno, -'],
+                null
+            ],
+        ];
+    }
+
+    /**
+     * @dataProvider coachDataProvider
+     * @param array $response
+     * @param string $expectedResult
+     */
+    public function testGetCoach($response, $expectedResult)
+    {
+        $apiResponse = new APIResponse($response);
+        $this->assertSame($expectedResult, $apiResponse->getCoach());
     }
 
     public function testGetModule()
