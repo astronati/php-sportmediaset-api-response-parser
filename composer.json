@@ -3,7 +3,7 @@
   "description": "Allows to map responses provided by any SportMediaset API endpoint",
   "type": "library",
   "license": "MIT",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "authors": [
     {
       "name": "Andrea Stronati",
@@ -13,12 +13,16 @@
   "minimum-stability": "stable",
   "require-dev": {
     "codacy/coverage": "^1.4",
-    "phpunit/phpunit": "^6.5",
-    "phpunit/php-code-coverage": "^5.3",
-    "phpstan/phpstan": "^0.9.1"
+    "phpstan/phpstan": "^0.9.1",
+    "phpunit/phpunit": "^9"
   },
   "require": {
     "php": ">=7.2.5"
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
   },
   "autoload": {
     "psr-4": {

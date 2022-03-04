@@ -1,6 +1,6 @@
 <?php
 
-namespace SODRP\tests\Response\Parser;
+namespace Tests\Response\Parser;
 
 use PHPUnit\Framework\TestCase;
 use SMRP\Exception\NotFoundResponseTypeException;

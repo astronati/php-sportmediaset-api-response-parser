@@ -1,6 +1,6 @@
 <?php
 
-namespace SMRP\tests\Model;
+namespace Tests\Model;
 
 use PHPUnit\Framework\TestCase;
 use SMRP\Model\FootballerModel;

@@ -1,6 +1,6 @@
 <?php
 
-namespace SMRP\tests\Response\Parser;
+namespace Tests\Response\Parser;
 
 use PHPUnit\Framework\TestCase;
 use SMRP\Model\MatchModel;

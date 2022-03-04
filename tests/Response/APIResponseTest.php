@@ -1,6 +1,6 @@
 <?php
 
-namespace SODRP\tests\Response;
+namespace Tests\Response;
 
 use PHPUnit\Framework\TestCase;
 use SMRP\Response\APIResponse;
@@ -118,6 +118,10 @@ class APIResponseTest extends TestCase
             ],
             [
                 ['squalificati' => '-'],
+                []
+            ],
+            [
+                ['squalificati' => '-\n'],
                 []
             ],
             [
