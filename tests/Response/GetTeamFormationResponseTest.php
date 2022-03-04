@@ -1,16 +1,15 @@
 <?php
 
-namespace SODRP\tests\Response;
+namespace Tests\Response;
 
 use PHPUnit\Framework\TestCase;
-use SMRP\Model\TeamFormationModel;
 use SMRP\Response\GetTeamFormationResponse;
 
 class GetTeamFormationResponseTest extends TestCase
 {
     private function getTeamFormationModelInstance()
     {
-        $instance = $this->getMockBuilder(TeamFormationModel::class)
+        $instance = $this->getMockBuilder('SMRP\Model\TeamFormationModel')
           ->disableOriginalConstructor()
           ->setMethods(['getCoach'])
           ->getMock();

@@ -1,6 +1,6 @@
 <?php
 
-namespace SODRP\tests\Response;
+namespace Tests\Response;
 
 use PHPUnit\Framework\TestCase;
 use SMRP\Model\MatchModel;
