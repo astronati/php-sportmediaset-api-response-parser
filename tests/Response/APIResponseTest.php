@@ -132,6 +132,170 @@ class APIResponseTest extends TestCase
                 ['squalificati' => 'nome footballer, FARAGò. PAVOLETTI, ANDREA M.'],
                 ['nome footballer', 'FARAGò', 'PAVOLETTI', 'ANDREA M.']
             ],
+            [
+                array (
+                    'titolari' =>
+                        array (
+                            'title' => 'formazionetitolari',
+                            'content' =>
+                                array (
+                                    'Tables' =>
+                                        array (
+                                            0 =>
+                                                array (
+                                                    'id' => 'tableformazionetitolari',
+                                                    'didascalie' =>
+                                                        array (
+                                                        ),
+                                                    'Rows' =>
+                                                        array (
+                                                            0 =>
+                                                                array (
+                                                                    'numero-maglia' => '28',
+                                                                    'giocatore' => 'CRAGNO',
+                                                                ),
+                                                            1 =>
+                                                                array (
+                                                                    'numero-maglia' => '3',
+                                                                    'giocatore' => 'GOLDANIGA',
+                                                                ),
+                                                            2 =>
+                                                                array (
+                                                                    'numero-maglia' => '66',
+                                                                    'giocatore' => 'lovato',
+                                                                ),
+                                                            3 =>
+                                                                array (
+                                                                    'numero-maglia' => '15',
+                                                                    'giocatore' => 'ALTARE',
+                                                                ),
+                                                            4 =>
+                                                                array (
+                                                                    'numero-maglia' => '12',
+                                                                    'giocatore' => 'bellanova',
+                                                                ),
+                                                            5 =>
+                                                                array (
+                                                                    'numero-maglia' => '8',
+                                                                    'giocatore' => 'MARIN',
+                                                                ),
+                                                            6 =>
+                                                                array (
+                                                                    'numero-maglia' => '14',
+                                                                    'giocatore' => 'DEIOLA',
+                                                                ),
+                                                            7 =>
+                                                                array (
+                                                                    'numero-maglia' => '27',
+                                                                    'giocatore' => 'grassi',
+                                                                ),
+                                                            8 =>
+                                                                array (
+                                                                    'numero-maglia' => '29',
+                                                                    'giocatore' => 'DALBERT',
+                                                                ),
+                                                            9 =>
+                                                                array (
+                                                                    'numero-maglia' => '20',
+                                                                    'giocatore' => 'PEREIRO',
+                                                                ),
+                                                            10 =>
+                                                                array (
+                                                                    'numero-maglia' => '10',
+                                                                    'giocatore' => 'joao pedro',
+                                                                ),
+                                                        ),
+                                                ),
+                                        ),
+                                ),
+                        ),
+                    'sostituzioni' =>
+                        array (
+                            'title' => 'sostituzioniformazione',
+                            'content' =>
+                                array (
+                                    'Tables' =>
+                                        array (
+                                            0 =>
+                                                array (
+                                                    'id' => 'tablesostituzioniformazione',
+                                                    'didascalie' =>
+                                                        array (
+                                                        ),
+                                                    'Rows' =>
+                                                        array (
+                                                            0 =>
+                                                                array (
+                                                                    'numero-maglia' => '31',
+                                                                    'giocatore' => 'RADUNOVIC',
+                                                                ),
+                                                            1 =>
+                                                                array (
+                                                                    'numero-maglia' => '1',
+                                                                    'giocatore' => 'ARESTI',
+                                                                ),
+                                                            2 =>
+                                                                array (
+                                                                    'numero-maglia' => '44',
+                                                                    'giocatore' => 'carboni',
+                                                                ),
+                                                            3 =>
+                                                                array (
+                                                                    'numero-maglia' => '23',
+                                                                    'giocatore' => 'CEPPITELLI',
+                                                                ),
+                                                            4 =>
+                                                                array (
+                                                                    'numero-maglia' => '22',
+                                                                    'giocatore' => 'Lykogiannis',
+                                                                ),
+                                                            5 =>
+                                                                array (
+                                                                    'numero-maglia' => '33',
+                                                                    'giocatore' => 'OBERT',
+                                                                ),
+                                                            6 =>
+                                                                array (
+                                                                    'numero-maglia' => '25',
+                                                                    'giocatore' => 'zappa',
+                                                                ),
+                                                            7 =>
+                                                                array (
+                                                                    'numero-maglia' => '39',
+                                                                    'giocatore' => 'Kourfalidis',
+                                                                ),
+                                                            8 =>
+                                                                array (
+                                                                    'numero-maglia' => '4',
+                                                                    'giocatore' => 'baselli',
+                                                                ),
+                                                            9 =>
+                                                                array (
+                                                                    'numero-maglia' => '9',
+                                                                    'giocatore' => 'keita',
+                                                                ),
+                                                            10 =>
+                                                                array (
+                                                                    'numero-maglia' => '30',
+                                                                    'giocatore' => 'PAVOLETTI',
+                                                                ),
+                                                        ),
+                                                ),
+                                        ),
+                                ),
+                        ),
+                    'squalificati' => '-
+',
+                    'indisponibiliformazione' => 'Ceter, Walukiewicz, Rog, Strootman, Nandez',
+                    'modulo' => '3-5-1-1',
+                    'ufficiali' => 'false',
+                    'allenatore' => 'Mazzarri',
+                    'kpm3id' => '6707482',
+                    'teamOptaId' => '124',
+                    'urlSquadra' => 'https://www.sportmediaset.mediaset.it/risultati-classifiche/calcio/serie-a/squadra.shtml?season=2021&competition=21&team=124',
+                ),
+                []
+            ]
         ];
     }
 
