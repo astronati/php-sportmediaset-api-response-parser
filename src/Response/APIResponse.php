@@ -63,6 +63,7 @@ class APIResponse
             && strpos(strtolower($this->response['squalificati']), 'nessuno') === false
             && strtolower($this->response['squalificati']) != '-'
             && strtolower($this->response['squalificati']) != '-\n'
+            && strtolower($this->response['squalificati']) != '-'.PHP_EOL
         ) {
             $responseDisqualified = str_replace('\n', '', $this->response['squalificati']);
             foreach (explode(',', $responseDisqualified) as $data) {
